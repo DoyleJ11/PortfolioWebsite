@@ -1,4 +1,32 @@
-body {
-  color: black;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+$bg-color: white;
+
+
+:root {
+   --main-color: #3664e8;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  color: black;
+  font-family: "Poppins", sans-serif;
+  background-color: $bg-color;
+}
+
+.main-container {
+  ul {
+    scroll-behavior: smooth;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    padding-left: 10vw;
+    box-sizing: border-box;
+    overflow: auto;
+    cursor: none;
+  }
+}

@@ -147,8 +147,22 @@ const handleMouseLeave = () => {
     dispatch({type: 'MOUSE/LEAVE'})
     setSize("small")
 }
+
+const handleTouch = () => {
+    // You can include further logic here to determine whether to play or pause the video
+    const mediaElement = listItem.current.querySelector('video');
+    if (mediaElement) {
+      if (mediaElement.paused) {
+        mediaElement.play();
+      } else {
+        mediaElement.pause();
+      }
+    }
+    handleMouseEnter(); // This will trigger the scaling and opacity changes
+  };
+
     return (
-        <li className='project-item-container' ref={listItem}>
+        <li className='project-item-container' ref={listItem} onClick={handleTouch} onTouchEnd={handleTouch}>
             <Title title={project.title} handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave}/>
             {/* <Image url={project.url} opacity={state.opacity} paralaxPos={state.paralaxPos} scale={state.scale} rotationPos={state.rotationPos}/> */}
             <Media url={project.url} mediaType={project.mediaType} opacity={state.opacity} paralaxPos={state.paralaxPos} scale={state.scale} rotationPos={state.rotationPos}/>

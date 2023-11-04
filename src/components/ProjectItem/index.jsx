@@ -1,4 +1,4 @@
-import React, { useRef, useReducer, useContext } from 'react';
+import React, { useRef, useReducer, useContext, useEffect } from 'react';
 import './style.scss';
 import Title from './Title';
 import Image from './Image';
@@ -68,7 +68,7 @@ function reducer (state, action) {
     }
 } 
 
-export default function ProjectItem({project, itemIndex}) {
+export default function ProjectItem({project, itemIndex, activeIndex, setActiveIndex}) {
 const listItem = useRef(null)
 const {setSize} = useContext(CursorContext)
 const [state, dispatch] = useReducer(reducer, initialState)
@@ -156,12 +156,22 @@ const handleMouseLeave = () => {
 // }
 
 const handleTouch = () => {
+    if (activeIndex !== itemIndex) {
+        setActiveIndex(itemIndex); // This method should be provided by the parent to manage active items.
+      }
     const mediaElement = listItem.current.querySelector('video');
     if (mediaElement) {
         mediaElement.play();
     }
     handleMouseEnter(); // This will trigger the scaling and opacity changes
 };
+
+useEffect(() => {
+    // If this item isn't the active one, ensure it is not showing as such
+    if (activeIndex !== itemIndex && state.active) {
+      dispatch({ type: 'MOUSE/LEAVE' });
+    }
+  }, [activeIndex, itemIndex, state.active]);
 
     return (
         <li className='project-item-container' ref={listItem} onClick={handleTouch} onTouchEnd={handleTouch}>

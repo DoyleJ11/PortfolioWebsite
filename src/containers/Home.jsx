@@ -10,6 +10,7 @@ export default function Home() {
   const menuItems = useRef(null);
   const [renderItems, setRenderItems] = useState(pageData);
   const [clonesHeight, setClonesHeight] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(null); // Add this line
 
   const cloneItems = () => {
     const itemHeight = menuItems.current.childNodes[0].offsetHeight;
@@ -63,7 +64,7 @@ export default function Home() {
       <div className="main-container" id="main-container">
         <ul ref={menuItems}>
           {renderItems.map((project, index) => (
-            <ProjectItem key={index} project={project} itemIndex={index} />
+            <ProjectItem key={index} project={project} itemIndex={index} activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
           ))}
         </ul>
       </div>

@@ -6,6 +6,8 @@ export default function Media({ url, mediaType, opacity, paralaxPos, scale, rota
             <video
                 src={url}
                 autoPlay
+                controls={false}
+                playsInline
                 muted
                 loop
                 style={{
